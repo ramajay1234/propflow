@@ -1,0 +1,21 @@
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 80px);
+    gap: 8px;
+}
+
+.unit {
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.available { background: #2ecc71; }
+.blocked { background: #7f8c8d; cursor: not-allowed; }
+.booked { background: #e74c3c; cursor: not-allowed; }
+
+.floor-row {
+    margin-bottom: 15px;
+}

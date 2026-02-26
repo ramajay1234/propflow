@@ -1,0 +1,80 @@
+<template>
+
+    <!-- SECTION 1: LEAD -->
+    <lightning-card title="Lead Information">
+
+        <template if:true={isEditMode}>
+            <p><b>Name:</b> {lead.FirstName} {lead.LastName}</p>
+            <p><b>Phone:</b> {lead.Phone}</p>
+            <p><b>Email:</b> {lead.Email}</p>
+        </template>
+
+        <template if:false={isEditMode}>
+            <lightning-input label="First Name" data-field="FirstName" onchange={handleLeadChange}></lightning-input>
+            <lightning-input label="Last Name" data-field="LastName" onchange={handleLeadChange}></lightning-input>
+            <lightning-input label="Phone" data-field="Phone" onchange={handleLeadChange}></lightning-input>
+            <lightning-input label="Email" data-field="Email" onchange={handleLeadChange}></lightning-input>
+        </template>
+
+    </lightning-card>
+
+    <!-- SECTION 2: PROJECT -->
+    <lightning-card title="Select Project">
+        <lightning-combobox
+            label="Project"
+            options={projectOptions}
+            value={selectedProjectId}
+            onchange={handleProjectChange}>
+        </lightning-combobox>
+    </lightning-card>
+
+    <!-- SECTION 3: TOWERS -->
+    <template if:true={towers}>
+        <lightning-card title="Select Tower">
+            <lightning-tabset>
+                <template for:each={towers} for:item="tower">
+                    <lightning-tab key={tower.id} label={tower.name}
+                                   data-id={tower.id}
+                                   onactive={handleTowerSelect}>
+                    </lightning-tab>
+                </template>
+            </lightning-tabset>
+        </lightning-card>
+    </template>
+
+    <!-- SECTION 4: FLOORS + FLATS -->
+    <template if:true={floors}>
+        <lightning-card title="Available Flats">
+
+            <template for:each={floors} for:item="floor">
+                <div key={floor.floorNumber} class="floor-row">
+                    <h3>Floor {floor.floorNumber}</h3>
+
+                    <div class="unit-grid">
+                        <template for:each={floor.units} for:item="unit">
+                            <div key={unit.unitId}
+                                 class={unit.cssClass}
+                                 data-id={unit.unitId}
+                                 onclick={handleUnitClick}>
+                                {unit.unitNumber}
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+        </lightning-card>
+    </template>
+
+    <!-- SECTION 5: FLAT DETAILS -->
+    <template if:true={selectedUnit}>
+        <lightning-card title="Flat Details">
+            <p>Unit: {selectedUnit.unitNumber}</p>
+            <p>Facing: {selectedUnit.facing}</p>
+            <p>Sqft: {selectedUnit.sqft}</p>
+            <p>Built-up Area: {selectedUnit.builtupArea}</p>
+            <p>Cost: {selectedUnit.price}</p>
+        </lightning-card>
+    </template>
+
+</template>

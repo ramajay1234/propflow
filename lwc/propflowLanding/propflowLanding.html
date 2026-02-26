@@ -1,0 +1,233 @@
+<template>
+    <div class="container">
+        <lightning-card title="PropFlow">
+            
+            <!-- Header -->
+            <div class="header">
+                <img src={logoUrl} alt="PropFlow Logo" class="logo" />
+                <h1>{appTitle}</h1>
+                <p class="tagline">Smart Real Estate on Salesforce</p>
+            </div>
+
+            <!-- Tabs -->
+            <lightning-tabset variant="scoped">
+
+                <!-- TAB 1: Overview -->
+                <lightning-tab label="Overview">
+                    <section class="card">
+                        <h2>About PropFlow</h2>
+                        <p>
+                            PropFlow is a Salesforce-native real estate solution designed
+                            to simplify Sales, Project Execution, and Post-Handover Support.
+                        </p>
+
+                        <h3>What’s Included (FREE)</h3>
+                        <ul class="list">
+                            <li>✔ Core data model & workflows</li>
+                            <li>✔ Basic dashboards & reports</li>
+                            <li>✔ Standard security & roles</li>
+                            <li>✔ Email-based support</li>
+                        </ul>
+                    </section>
+
+                    <section class="card highlight">
+                        <h2>Paid Enhancements (On Demand)</h2>
+                        <ul class="list">
+                            <li>➕ Advanced automation & approvals</li>
+                            <li>➕ Experience Cloud portals</li>
+                            <li>➕ SAP / ERP integrations</li>
+                            <li>➕ Custom reports & dashboards</li>
+                            <li>➕ Mobile & UI enhancements</li>
+                        </ul>
+                    </section>
+
+                    <section class="card">
+                        <h2>Engagement Models</h2>
+                        <div class="chips">
+                            <span class="chip">Monthly</span>
+                            <span class="chip">Annual</span>
+                            <span class="chip">Task-based</span>
+                            <span class="chip">Hourly</span>
+                        </div>
+                    </section>
+                </lightning-tab>
+
+                <!-- TAB 2: License Settings -->
+                <lightning-tab label="License Settings">
+                        <template if:true={licenses}>
+                            <lightning-datatable
+                                key-field="Id"
+                                data={licenses}
+                                columns={columns}
+                                hide-checkbox-column>
+                            </lightning-datatable>
+                        </template>
+
+                        <template if:true={error}>
+                            <div class="slds-text-color_error">
+                                Error loading license data: {error.body.message}
+                            </div>
+                        </template>
+                        <div class="slds-text-color_error slds-m-top_small">
+                            ⚠ If you want to upgrade to Gold or Platinum, please contact us at <strong>support@sfcloudapps.com</strong>.
+                        </div>
+                </lightning-tab>
+
+                <!-- TAB 3: Apps Functionality -->
+                <lightning-tab label="Apps Functionality">
+                    <section class="card table-card">
+                        <h2>PropFlow vs Traditional ERP</h2>
+                        <p class="sub-text">
+                            Typical real-estate scenario: 20 internal users, 200 external users.
+                        </p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Area</th>
+                                    <th>Traditional ERP / SAP</th>
+                                    <th>PropFlow on Salesforce</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Internal Users</td>
+                                    <td>High-cost SAP Named Users</td>
+                                    <td>Salesforce Sales/Service users</td>
+                                </tr>
+                                <tr>
+                                    <td>External Users</td>
+                                    <td>Costly / Limited portals</td>
+                                    <td>Low-cost Experience Cloud users</td>
+                                </tr>
+                                <tr>
+                                    <td>Sales CRM</td>
+                                    <td>SAP CRM</td>
+                                    <td>Built-in PropFlow CRM</td>
+                                </tr>
+                                <tr>
+                                    <td>Project Tracking</td>
+                                    <td>SAP PS (Complex)</td>
+                                    <td>Lightweight Salesforce objects</td>
+                                </tr>
+                                <tr>
+                                    <td>After-Sales Support</td>
+                                    <td>SAP CS</td>
+                                    <td>Native Case Management</td>
+                                </tr>
+                                <tr>
+                                    <td>Customer Portal</td>
+                                    <td>Custom SAP Portal</td>
+                                    <td>Experience Cloud</td>
+                                </tr>
+                                <tr>
+                                    <td>Customization</td>
+                                    <td>ABAP-heavy, slow</td>
+                                    <td>Fast Salesforce customization</td>
+                                </tr>
+                                <tr>
+                                    <td>Implementation Time</td>
+                                    <td>9–12 months</td>
+                                    <td>3–6 months</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="disclaimer">
+                            *Finance & GL can continue in SAP while PropFlow handles CRM, Projects, and Support.*
+                        </p>
+                    </section>
+                    <lightning-card title="App Functionality">
+
+                        <!-- Sales Module -->
+                        <section class="section">
+                            <h3 class="title available">Sales Module (Available)</h3>
+                            <p class="desc">
+                                The Sales module is basic implemented and ready to use.
+                                It helps businesses manage leads, customers, and sales activities
+                                efficiently on Salesforce.
+                            </p>
+
+                            <ul class="feature-list">
+                                <li>Lead capture & management</li>
+                                <li>Lead qualification & status tracking</li>
+                                <li>Budget, unit type & purchase timeline tracking</li>
+                                <li>Sales pipeline visibility</li>
+                                <li>Basic reports & dashboards</li>
+                                <li>Salesforce-native security & roles</li>
+                            </ul>
+                        </section>
+
+                        <!-- Projects Module -->
+                        <section class="section">
+                            <h3 class="title progress">Projects Module (Under Progress)</h3>
+                            <p class="desc">
+                                The Projects module is currently under development and will support
+                                end-to-end project execution tracking.
+                            </p>
+
+                            <ul class="feature-list muted">
+                                <li>Project and phase management</li>
+                                <li>Construction progress tracking</li>
+                                <li>Milestone visibility</li>
+                                <li>Internal team collaboration</li>
+                                <li>Project-level reporting</li>
+                            </ul>
+                        </section>
+
+                        <!-- Maintenance Module -->
+                        <section class="section">
+                            <h3 class="title progress">Maintenance Module (Under Progress)</h3>
+                            <p class="desc">
+                                The Maintenance module is designed to manage post-handover customer
+                                support and maintenance requests.
+                            </p>
+
+                            <ul class="feature-list muted">
+                                <li>Maintenance request logging</li>
+                                <li>Ticket & status tracking</li>
+                                <li>Customer communication</li>
+                                <li>SLA & resolution tracking</li>
+                                <li>Maintenance analytics</li>
+                            </ul>
+                        </section>
+
+                        <!-- Support & Licensing -->
+                        <section class="section highlight">
+                            <h3 class="title">Development & Support Model</h3>
+                            <p class="desc">
+                                We provide <strong>3 months of full development and support</strong>&nbsp;
+                                after installation with minimal charges based on client requirements.
+                            </p>
+
+                            <p class="desc">
+                                After testing and successful go-live, license charges will apply
+                                based on the selected plan (Silver / Gold / Platinum).
+                            </p>
+
+                            <p class="contact">
+                                📩 To upgrade or enable additional features, please contact
+                                <strong>&nbsp;support@sfcloudapps.com</strong>
+                            </p>
+                        </section>
+
+                    </lightning-card>
+                </lightning-tab>
+
+            </lightning-tabset>
+
+            <!-- Contact -->
+            <!--section class="card contact">
+                <h2>Contact Us</h2>
+                <p>Email: <strong>support@sfcloudapps.com</strong></p>
+                <p>Phone: <strong>+91-XXXXXXXXXX</strong></p>
+                <lightning-button
+                    label="Request Customization"
+                    variant="brand"
+                    onclick={handleContact}>
+                </lightning-button>
+            </section-->
+
+        </lightning-card>
+    </div>
+</template>

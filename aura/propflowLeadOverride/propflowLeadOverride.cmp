@@ -1,0 +1,6 @@
+<aura:component implements="force:lightningQuickAction,lightning:actionOverride,force:hasRecordId,flexipage:availableForAllPageTypes"
+                access="global">
+
+    <c:propflowLeadCreate />
+
+</aura:component>

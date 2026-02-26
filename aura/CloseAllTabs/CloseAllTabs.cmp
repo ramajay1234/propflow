@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <!-- tuning attributes -->
+    <aura:attribute name="maxRetries" type="Integer" default="10"/>
+    <aura:attribute name="retryIntervalMs" type="Integer" default="300"/>
+
+    <!-- workspace API -->
+    <lightning:workspaceAPI aura:id="workspaceAPI"/>
+
+    <!-- init handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.handleInit}"/>
+</aura:component>

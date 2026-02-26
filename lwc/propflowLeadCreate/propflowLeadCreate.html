@@ -1,0 +1,130 @@
+<template>
+    <lightning-card title="PropFlow – Lead Creation">
+
+        <!-- SECTION 1: Personal Details -->
+        <div class="section">
+            <h3>Personal Details</h3>
+
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6">
+                    <lightning-input label="First Name" data-field="FirstName" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input label="Last Name" data-field="LastName" required onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input label="Phone" data-field="Phone" required onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input label="Email" data-field="Email" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <!-- SECTION 2: Address -->
+        <div class="section">
+            <h3>Address Details</h3>
+
+            <lightning-textarea label="Street" data-field="Street" onchange={handleChange}></lightning-textarea>
+
+            <lightning-layout>
+                <lightning-layout-item size="4">
+                    <lightning-input label="City" data-field="City" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="4">
+                    <lightning-input label="State" data-field="State" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="4">
+                    <lightning-input label="Postal Code" data-field="PostalCode" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-input label="Country" data-field="Country" onchange={handleChange}></lightning-input>
+        </div>
+
+        <!-- SECTION 3: Business Details -->
+        <div class="section">
+            <h3>Business Details</h3>
+
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6">
+                    <lightning-input label="Company" data-field="Company" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input label="Website" data-field="Website" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input label="Industry" data-field="Industry" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6">
+                    <lightning-input type="number" label="Annual Revenue" data-field="AnnualRevenue" onchange={handleChange}></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <!-- SECTION 4: Property Requirements -->
+        <div class="section highlight">
+            <h3>Property Requirement</h3>
+
+            <lightning-input label="Preferred Location" data-field="Preferred_Location__c" onchange={handleChange}></lightning-input>
+
+            <lightning-combobox label="Unit Type"
+                data-field="Unit_Type__c"
+                options={unitOptions}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <!-- Budget Slider -->
+            <div class="slider">
+                <label>Budget Range (₹ Lakhs)</label>
+                <lightning-slider
+                    min="20"
+                    max="300"
+                    step="10"
+                    value={budget}
+                    onchange={handleBudget}>
+                </lightning-slider>
+                <p class="value">₹ {budget} Lakhs</p>
+            </div>
+
+            <!-- Purchase Timeline Slider -->
+            <div class="slider">
+                <label>Purchase Timeline (Months)</label>
+                <lightning-slider
+                    min="1"
+                    max="36"
+                    step="1"
+                    value={timeline}
+                    onchange={handleTimeline}>
+                </lightning-slider>
+                <p class="value">{timeline} Months</p>
+            </div>
+        </div>
+
+        <!-- SECTION 5: Sales Qualification -->
+        <div class="section">
+            <h3>Sales Qualification</h3>
+
+            <lightning-combobox label="Site Visit Status"
+                data-field="Site_Visit_Status__c"
+                options={visitOptions}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <lightning-input type="checkbox" label="Qualified" data-field="Qualified__c" onchange={handleCheckbox}></lightning-input>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <lightning-button label="Cancel" variant="brand" onclick={cancel}></lightning-button>
+            <lightning-button label="Save Lead" variant="brand" onclick={saveLead}></lightning-button>
+        </div>
+
+    </lightning-card>
+</template>

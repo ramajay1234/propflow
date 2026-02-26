@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"
+                access="global" >
+    <lightning:workspaceAPI aura:id="workspace"/>
+    <p>Are you sure want to close all un pinned tabs?</p>
+        
+
+</aura:component>

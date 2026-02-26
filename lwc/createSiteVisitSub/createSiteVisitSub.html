@@ -1,0 +1,70 @@
+<template>
+    <div class="slds-modal__container">
+
+            <!-- Header -->
+            <header class="slds-modal__header">
+                <h2 class="slds-text-heading_medium">Create Site Visit</h2>
+            </header>
+        <template if:false={showmessage}>
+            <!-- Body -->
+            <div class="slds-modal__content slds-p-around_medium">
+
+                <lightning-record-edit-form
+                    object-api-name="SFCloudApps__Site_Visit__c"
+                    onsuccess={handleSuccess}
+                    onerror={handleError}>
+
+                    <lightning-messages></lightning-messages>
+
+                    <!-- Hidden Lead Lookup -->
+                    <lightning-input-field
+                        field-name="SFCloudApps__Lead__c"
+                        value={recordId}>
+                    </lightning-input-field>
+
+                    <!-- Project Lookup -->
+                    <lightning-input-field field-name="SFCloudApps__Project__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__Visit_Date_Time__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__User__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__Visit_Outcome__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__Follow_up_Date__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__Customer_Feedback__c"></lightning-input-field>
+
+                    <lightning-input-field field-name="SFCloudApps__Status__c"></lightning-input-field>
+
+                    <!-- Footer Buttons -->
+                    <div class="slds-m-top_medium slds-text-align_right">
+                        <lightning-button
+                            label="Cancel"
+                            onclick={closeModal}
+                            class="slds-m-right_small">
+                        </lightning-button>
+
+                        <lightning-button
+                            variant="brand"
+                            type="submit"
+                            label="Save">
+                        </lightning-button>
+                    </div>
+
+                </lightning-record-edit-form>
+
+            </div>
+        </template>
+        <template if:true={errormessage}>
+            <div class="slds-text-color_error slds-m-bottom_small">
+                {errormessage}
+            </div>
+        </template>
+        <template if:true={successmessage}>
+            <div class="slds-text-color_success slds-m-bottom_small">
+                {successmessage}
+            </div>
+        </template>
+    </div>
+</template>

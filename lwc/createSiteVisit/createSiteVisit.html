@@ -1,0 +1,15 @@
+<template>
+    <lightning-button
+        label="Create Site Visit"
+        variant="brand"
+        onclick={openModal}>
+    </lightning-button>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+            <c-create-site-visit-sub from-sites = {fromsites} onhandlesuccess={handleSuccess} onhandleerror={handleError}></c-create-site-visit-sub>
+        </section>
+
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
